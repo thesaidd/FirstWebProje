@@ -1,0 +1,32 @@
+﻿@model EntityLayer.Concrete.Portfolio
+
+@{
+    ViewData["Title"] = "AddPortfolio";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card-header border-0">
+    <h3 class="mb-0">Yeni proje Ekleme Sayfası</h3>
+</div>
+@using (Html.BeginForm("AddPortfolio", "Portfolio", FormMethod.Post))
+{
+    <br />
+    @Html.Label("Proje başlığı")
+    @Html.TextBoxFor(x => x.Name, new {@class = "from-control"})
+    @Html.ValidationMessageFor(x => x.Name)
+    <br />
+    <label>Görsel 1</label>
+    @Html.TextBoxFor(x => x.ImageuUrl, new { @class = "from-control" })
+    @Html.ValidationMessageFor(x => x.ImageuUrl)
+    <br />
+    <label>Görsel 2</label>
+    @Html.TextBoxFor(x => x.ImageuUrl2, new { @class = "from-control" })
+    @Html.ValidationMessageFor(x => x.ImageuUrl2)
+    <br />
+    <label>Proje URL</label>
+    @Html.TextBoxFor(x => x.ProjectUrl, new { @class = "from-control" })
+    @Html.ValidationMessageFor(x => x.ProjectUrl)
+    <br />
+    <button type="submit" class="btn btn-primary">Kaydet</button>
+    <a href="/Experience/Index/" class="btn btn-secondary">İptal et ve Geri Dön</a>
+}

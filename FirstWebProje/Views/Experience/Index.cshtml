@@ -1,0 +1,66 @@
+﻿@using EntityLayer.Concrete
+@model List<Experience>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card-header border-0">
+    <div class="row align-items-center">
+        <div class="col">
+            <h3 class="mb-0">Deneyim Listesi</h3>
+        </div>
+    </div>
+</div>
+
+@if (TempData["Message"] != null)
+{
+    <div class="alert alert-info mt-3" role="alert">
+        @TempData["Message"]
+    </div>
+}
+
+<div class="table-responsive">
+    <table class="table align-items-center table-flush">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col" class="sort" data-sort="name">#</th>
+                <th scope="col" class="sort" data-sort="budget">Başlık</th>
+                <th scope="col" class="sort" data-sort="status">Tarih</th>
+                <th scope="col">Sil</th>
+                <th scope="col" class="sort" data-sort="completion">Düzenle</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody class="list">
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th>
+                        @item.Id  @* Generic yapıya geçtiğimiz için ExperienceID -> Id oldu *@
+                    </th>
+                    <th class="budget">
+                        @item.Name
+                    </th>
+                    <td>
+                        @item.Date
+                    </td>
+                    <td>
+                        <form asp-controller="Experience" asp-action="DeleteExperience" asp-route-id="@item.Id" method="post">
+                            <button type="submit" class="btn btn-danger"
+                                    onclick="return confirm('Bu deneyimi silmek istediğinizden emin misiniz? Kayıt çöp kutusuna taşınacaktır.');">
+                                Sil
+                            </button>
+                        </form>
+                    </td>
+                    <td><a href="/Experience/EditExperience/@item.Id" class="btn btn-success">Güncelle</a></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+    <a href="/Experience/AddExperience/" class="btn btn-primary">Yeni Deneyim Ekle</a>
+    <a href="/Experience/DeletedExperience/" class="btn btn-warning">Çöp Kutusu (Silinmiş Deneyimler)</a>
+</div>
+

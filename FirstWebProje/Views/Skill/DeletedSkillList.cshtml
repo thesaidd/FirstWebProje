@@ -1,0 +1,62 @@
+﻿@using EntityLayer.Concrete
+@model List<Skill>
+
+@{
+    ViewData["Title"] = "Silinmiş Yetenekler";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml"; // Kendi layout'unuzun yolu
+}
+
+<div class="card-header border-0">
+    <h3 class="mb-0">Çöp Kutusu - Silinmiş Yetenekler Tablosu</h3>
+    <a href="/Skill/Index/" class="btn btn-primary mt-3">Aktif Yetenekler Listesine Geri Dön</a>
+</div>
+<div class="table-responsive">
+    <table class="table align-items-center table-flush">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col" class="sort" data-sort="name">#</th>
+                <th scope="col" class="sort" data-sort="budget">Başlık</th>
+                <th scope="col" class="sort" data-sort="status">Oran</th>
+                <th scope="col">Geri Yükle</th>
+                <th scope="col">Kalıcı Olarak Sil</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody class="list">
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th>
+                        @item.SkillId
+                    </th>
+                    <td class="budget">
+                        @item.Title
+                    </td>
+                    <td>
+                        <div class="d-flex align-items-center">
+                            <span class="completion mr-2">@item.Value%</span>
+                            <div>
+                                <div class="progress">
+                                    <div class="progress-bar bg-success" role="progressbar" aria-valuenow="@item.Value" aria-valuemin="0" aria-valuemax="100" style="width: @item.Value%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <form asp-action="RestoreSkill" asp-route-id="@item.SkillId" method="post">
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="btn btn-info">Geri Yükle</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form asp-action="PermanentDeleteSkill" asp-route-id="@item.SkillId" method="post">
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Bu kaydı kalıcı olarak silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.');">Kalıcı Sil</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
