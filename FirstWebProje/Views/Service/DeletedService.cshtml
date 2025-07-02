@@ -1,0 +1,64 @@
+﻿@using EntityLayer.Concrete
+@model List<Service>
+
+@{
+    ViewData["Title"] = "DeletedService";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="card-header border-0">
+    <h3 class="mb-0">Çöp Kutusu - Silinmiş hizmetler Tablosu</h3>
+    <a href="/Service/Index/" class="btn btn-primary mt-3">Aktif hizmetler Listesine Geri Dön</a>
+</div>
+<div class="table-responsive">
+    <table class="table align-items-center table-flush">
+        <thead class="thead-light">
+            <tr>
+                <th scope="col" class="sort" data-sort="name">#</th>
+                <th scope="col" class="sort" data-sort="budget">Başlık</th>
+                <th scope="col" class="sort" data-sort="status">Foto</th>
+                <th scope="col">Geri Yükle</th>
+                <th scope="col">Kalıcı Olarak Sil</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody class="list">
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th>
+                        @item.ServiceID
+                    </th>
+                    <td class="budget">
+                        @item.Title
+                    </td>
+                    <td>
+                        @if (!string.IsNullOrEmpty(item.ImageUrl))
+                        {
+                            <img src="@item.ImageUrl"
+                                 style="width: 100px; height: auto; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);"
+                                 alt="@item.Title görseli" />
+                        }
+                        else
+                        {
+                            <span class="text-muted">Görsel Yok</span>
+                        }
+                    </td>
+                    <td>
+                        <form asp-action="RestoreService" asp-route-id="@item.ServiceID" method="post">
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="btn btn-info">Geri Yükle</button>
+                        </form>
+                    </td>
+                    <td>
+                        <form asp-action="PermanentDeleteService" asp-route-id="@item.ServiceID" method="post">
+                            @Html.AntiForgeryToken()
+                            <button type="submit" class="btn btn-danger" onclick="return confirm('Bu kaydı kalıcı olarak silmek istediğinizden emin misiniz? Bu işlem geri alınamaz.');">Kalıcı Sil</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

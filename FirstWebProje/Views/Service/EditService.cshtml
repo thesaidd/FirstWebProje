@@ -1,0 +1,32 @@
+﻿@model EntityLayer.Concrete.Service
+
+@{
+    ViewData["Title"] = "EditService";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<div class="card-header border-0">
+    <h3 class="mb-0">Deneyim Düzenleme Sayfası</h3>
+</div>
+
+<form asp-action="EditService" method="post" class="p-3">
+
+    @* ID'nin form ile birlikte sunucuya geri gönderilmesi ÇOK ÖNEMLİDİR. *@
+    <input type="hidden" asp-for="ServiceID" />
+    @* Soft delete için IsDeleted bayrağını da gönderelim ki kaybolmasın *@
+    <input type="hidden" asp-for="IsDeleted" />
+
+    <div class="form-group">
+        <label asp-for="Title">Hizmet Başlığı</label>
+        <input type="text" asp-for="Title" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label asp-for="ImageUrl">Görsel URL</label>
+        <input type="text" asp-for="ImageUrl" class="form-control" />
+    </div>
+    <br />
+    <button type="submit" class="btn btn-success">Güncelle</button>
+    <a href="/Service/Index/" class="btn btn-secondary">İptal et ve Geri Dön</a>
+
+</form>

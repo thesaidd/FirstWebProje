@@ -101,11 +101,21 @@ namespace FirstWebProje.Controllers
             ViewBag.v2 = "Projeler";
             ViewBag.v3 = "Projeler günceşşendi";
             var values = portfolioManager.TGetByID(id);
+            if (values == null)
+            {
+                return NotFound(); // Kayıt yoksa 404 hatası verelim.
+            }
             return View(values);
         }
         [HttpPost]
         public IActionResult EditPortfolio(Portfolio portfolio)
         {
+            if (!ModelState.IsValid)
+            {
+                // 2. EĞER model geçerli DEĞİLSE, kullanıcıya aynı formu, 
+                // girdiği veriler kaybolmadan ve hata mesajlarıyla birlikte geri gösteriyoruz.
+                return View(portfolio);
+            }
             portfolioManager.TUpdate(portfolio);
             return RedirectToAction("Index");
         }

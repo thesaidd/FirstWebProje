@@ -9,5 +9,12 @@ namespace BusinessLayer.Abstract
 {
     public interface IServiceService: IGenericService<Service>
     {
+        List<Service> TGetDeletedList();
+
+        // Silinmiş bir denetimi geri yükler
+        void TRestore(int id);
+
+        // Bir denetimi veritabanından kalıcı olarak siler
+        void TPermanentDelete(int id);
     }
 }

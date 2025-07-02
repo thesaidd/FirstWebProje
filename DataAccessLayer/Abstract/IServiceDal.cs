@@ -9,5 +9,8 @@ namespace DataAccessLayer.Abstract
 {
     public interface IServiceDal : IGenericDal<Service>
     {
+        List<Service> GetDeletedList();
+        void Restore(int id);
+        void PermanentDelete(int id);
     }
 }

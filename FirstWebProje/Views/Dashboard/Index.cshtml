@@ -1,0 +1,101 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+<!--
+=========================================================
+* Argon Dashboard - v1.2.0
+=========================================================
+* Product Page: https://www.creative-tim.com/product/argon-dashboard
+
+
+* Copyright  Creative Tim (http://www.creative-tim.com)
+* Coded by www.creative-tim.com
+
+
+
+=========================================================
+* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+-->
+@await Component.InvokeAsync("FeatureStatistic")
+
+<div class="container-fluid mt--6">
+    <div class="row">
+        <div class="col-xl-8">
+            @await Component.InvokeAsync("Last5Projects")
+
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="mb-0">Deneyimlerim</h3>
+                </div>
+                <div class="card-body">
+                    <div class="mb-4">
+                        <h5>Kıdemli Yazılım Geliştirici - Teknoloji A.Ş.</h5>
+                        <p class="text-muted">Ocak 2020 - Günümüz</p>
+                        <ul>
+                            <li>Büyük ölçekli web uygulamalarının geliştirilmesi ve bakımı.</li>
+                            <li>Yeni teknolojilerin araştırılması ve ekibe entegrasyonu.</li>
+                            <li>Genç geliştiricilere mentorluk yapılması.</li>
+                        </ul>
+                    </div>
+                    <hr />
+                    <div class="mt-4">
+                        <h5>Yazılım Geliştirici - YazılımEvi Ltd.</h5>
+                        <p class="text-muted">Haziran 2017 - Aralık 2019</p>
+                        <ul>
+                            <li>Müşteri taleplerine göre özel yazılım çözümleri geliştirme.</li>
+                            <li>Veritabanı tasarımı ve optimizasyonu.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="col-xl-4">
+
+            @await Component.InvokeAsync("DashboardSkill")
+
+            @await Component.InvokeAsync("DashboardMessage")
+
+            @await Component.InvokeAsync("AboutCart")
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <h3 class="mb-3">Hizmetler</h3>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="card text-center py-4">
+                <div class="icon icon-shape icon-shape-primary rounded-circle mb-4">
+                    <i class="ni ni-laptop"></i>
+                </div>
+                <h6 class="text-primary text-uppercase">Web Uygulama Geliştirme</h6>
+                <p class="description px-4">İhtiyaçlarınıza özel, güvenli ve ölçeklenebilir web uygulamaları.</p>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="card text-center py-4">
+                <div class="icon icon-shape icon-shape-success rounded-circle mb-4">
+                    <i class="ni ni-cloud-upload-96"></i>
+                </div>
+                <h6 class="text-success text-uppercase">API & Entegrasyon</h6>
+                <p class="description px-4">Sistemleriniz arasında veri akışını sağlayan RESTful API servisleri.</p>
+            </div>
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="card text-center py-4">
+                <div class="icon icon-shape icon-shape-info rounded-circle mb-4">
+                    <i class="ni ni-settings"></i>
+                </div>
+                <h6 class="text-info text-uppercase">Teknik Danışmanlık</h6>
+                <p class="description px-4">Projenizin teknoloji seçimi ve mimari tasarımı için profesyonel destek.</p>
+            </div>
+        </div>
+    </div>
+</div>

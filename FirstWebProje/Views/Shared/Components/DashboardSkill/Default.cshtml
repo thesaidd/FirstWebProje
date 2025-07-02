@@ -1,0 +1,30 @@
+﻿@using EntityLayer.Concrete
+@model List<Skill>
+
+<div class="card">
+    <div class="card-header">
+        <h5 class="h3 mb-0">Yetenekler</h5>
+    </div>
+    <div class="card-body">
+        @foreach (var item in Model)
+        {
+            <div class="mb-4">
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                    <span class="h4 mb-0">@item.Title</span>
+                    <span class="font-weight-bold">@item.Value%</span>
+                </div>
+                <div class="progress" style="height: 15px;">
+                    <div class="progress-bar bg-primary"
+                         role="progressbar"
+                         style="width: @item.Value%;"
+                         aria-valuenow="@item.Value"
+                         aria-valuemin="0"
+                         aria-valuemax="100"
+                         data-aos="zoom-in-right"
+                         data-aos-delay="100">
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

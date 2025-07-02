@@ -19,18 +19,22 @@
     <div class="form-group">
         <label asp-for="Name">Proje Başlığı</label>
         <input type="text" asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="ImageuUrl">Görsel URL1</label>
         <input type="text" asp-for="ImageuUrl" class="form-control" />
+        <span asp-validation-for="ImageuUrl" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="ImageuUrl2">Görsel URL2</label>
         <input type="text" asp-for="ImageuUrl2" class="form-control" />
+        <span asp-validation-for="ImageuUrl2" class="text-danger"></span>
     </div>
     <div class="form-group">
         <label asp-for="ProjectUrl">Proje linki</label>
         <textarea asp-for="ProjectUrl" rows="5" class="form-control"></textarea>
+        <span asp-validation-for="ProjectUrl" class="text-danger"></span>
     </div>
     <br />
     <button type="submit" class="btn btn-success">Güncelle</button>

@@ -32,9 +32,24 @@ namespace BusinessLayer.Concrete
             return _serviceDal.GetById(id);
         }
 
+        public List<Service> TGetDeletedList()
+        {
+            return _serviceDal.GetDeletedList();
+        }
+
         public List<Service> TGetList()
         {
             return _serviceDal.GetList();
+        }
+
+        public void TPermanentDelete(int id)
+        {
+            _serviceDal.PermanentDelete(id);
+        }
+
+        public void TRestore(int id)
+        {
+            _serviceDal.Restore(id);
         }
 
         public void TUpdate(Service t)
