@@ -1,5 +1,5 @@
 ﻿@using EntityLayer.Concrete
-@model List<Message>
+@model List<UserMessage>
 
 <div class="card">
     <div class="card-header d-flex justify-content-between align-items-center">
@@ -27,20 +27,33 @@
             {
                 @foreach (var item in Model)
                 {
-                    // Status'a göre (okundu/okunmadı) class'ı dinamik olarak ayarla
-                    // Okunmadıysa (Status==false) arka planı açık gri ve yazıyı kalın yap
-                    var itemClass = item.Status ? "list-group-item-light font-weight-bold " : "";
+                    // Status==false (okunmadı) ise class'ı dinamik olarak ayarla.
+                    var itemClass = !item.Status ? "list-group-item-light font-weight-bold" : "";
 
-                    <a href="javascript:void(0);" class="list-group-item list-group-item-action flex-column align-items-start @itemClass">
-                        <div class="d-flex w-100 justify-content-between">
-                            <h5 class="mb-1">@item.Name</h5>
-                            <small>@item.Date.ToString("dd MMM yyyy")</small>
+                    // Varsayılan profil fotoğrafı yolu. Bu yolu kendi projenize göre güncelleyin.
+                    var profileImageUrl = !string.IsNullOrEmpty(item.User.ImageUrl) ? item.User.ImageUrl : "/images/default-avatar.png";
+
+                    <a href="javascript:void(0);" class="list-group-item list-group-item-action @itemClass">
+                        @* --- YENİ: Ana taşıyıcı olarak d-flex kullanıyoruz --- *@
+                        <div class="d-flex align-items-start w-100">
+
+                            @* --- YENİ: Kullanıcı Profil Fotoğrafı --- *@
+                            <img src="@item.User.ImageUrl" class="rounded-circle me-3" alt=@item.User.Name profil fotoğrafı" style="width: 30px; height: 30px; object-fit: cover;">
+
+                            @* Metin içeriğini taşıyan ve kalan tüm alanı kaplayan div *@
+                            <div class="flex-grow-1" style="min-width: 0;">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h5 class="mb-1">@item.User.Name</h5>
+                                    <small class="text-muted">@item.Date.ToString("dd MMM yy")</small>
+                                </div>
+
+                                <p class="mb-1"><strong>@item.Title</strong></p>
+
+                                <p class="mb-1 text-muted small text-truncate">
+                                    @item.Content
+                                </p>
+                            </div>
                         </div>
-                        <p class="mb-1 text-muted small">@item.Mail</p>
-                        <p class="mb-0">
-                            @* İçerik 100 karakterden uzunsa kısalt ve sonuna "..." ekle *@
-                            @(item.Content.Length > 100 ? item.Content.Substring(0, 100) + "..." : item.Content)
-                        </p>
                     </a>
                 }
             }

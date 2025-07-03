@@ -32,7 +32,9 @@ namespace FirstWebProje.Controllers
             p.Date = Convert.ToDateTime(DateTime.Now.ToShortDateString());
             p.Status = true;
             messageManager.TAdd(p);
+            TempData["SuccessMessage"] = "Mesajınız başarıyla alınmıştır. Teşekkür ederiz!";
             return PartialView();
         }
+        
     }
 }

@@ -6,10 +6,10 @@ namespace FirstWebProje.ViewComponents.Dashboard
 {
     public class DashboardMessage : ViewComponent
     {
-        MessageManager messageManager = new MessageManager(new EFMessageDal());
+        UserMessageManager messageManager = new UserMessageManager(new EFUserMessageDal());
         public IViewComponentResult Invoke()
         {
-            var values = messageManager.TGetList();
+            var values = messageManager.GetUserMessageWithUserService();
             return View(values);
         }
 

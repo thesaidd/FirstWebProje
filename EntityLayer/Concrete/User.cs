@@ -17,7 +17,7 @@ namespace EntityLayer.Concrete
         public String Mail { get; set; }
         public String Password { get; set; }
         public String ImageUrl { get; set; }
-        public int Status { get; set; }
+        public bool Status { get; set; }
         public List<UserMessage> UserMessages { get; set; }
     }
 }
