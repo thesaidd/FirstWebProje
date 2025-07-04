@@ -1,0 +1,73 @@
+﻿@using EntityLayer.Concrete
+@model List<ToDoList>
+
+<div class="card">
+    <div class="card-header border-0">
+        <div class="row align-items-center">
+            <div class="col">
+                <h3 class="mb-0">Yapılacaklar Listesi</h3>
+            </div>
+        </div>
+    </div>
+    <div class="card-body p-0">
+        <ul class="list-group list-group-flush" data-toggle="checklist">
+            @foreach (var item in Model.Take(2))
+            {
+              
+                // Status'a göre class'ları ve checked durumunu dinamik olarak ayarlıyoruz.
+                var statusClass = item.Status ? "checklist-item-success" : "checklist-item-warning";
+                var isChecked = item.Status ? "checked" : "";
+              
+                <li class="checklist-entry list-group-item flex-column align-items-start py-4 px-4">
+                    <div class="checklist-item @statusClass">
+                        <div class="checklist-info">
+                            <h5 class="checklist-title mb-0">@item.Content</h5>
+                        </div>
+                        <div>
+                            <div class="custom-control custom-checkbox custom-checkbox-success">
+                                <input class="custom-control-input" id="chk-task-@item.Id" type="checkbox" @isChecked>
+                                <label class="custom-control-label" for="chk-task-@item.Id"></label>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            }
+        </ul>
+        @* Eğer 3'ten fazla görev varsa, kalanını gizli bir alana koy *@
+        @if (Model.Count > 2)
+        {
+            <div class="collapse" id="collapseToDoList">
+                <ul class="list-group list-group-flush" data-toggle="checklist">
+                    @foreach (var item in Model.Skip(2))
+                    {
+                        <li class="checklist-entry list-group-item flex-column align-items-start py-4 px-4">
+                            @{
+                                // item.Status'a göre class ve checked durumunu ayarlıyoruz.
+                                var statusClass = item.Status ? "checklist-item-success" : "checklist-item-warning";
+                                var isChecked = item.Status ? "checked" : "";
+                            }
+                            <div class="checklist-item @statusClass">
+                                <div class="checklist-info">
+                                    <h5 class="checklist-title mb-0">@item.Content</h5>
+                                </div>
+                                <div>
+                                    <div class="custom-control custom-checkbox custom-checkbox-success">
+                                        <input class="custom-control-input" id="chk-task-@item.Id" type="checkbox" @isChecked>
+                                        <label class="custom-control-label" for="chk-task-@item.Id"></label>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+
+            @* Genişletme/Daraltma butonu *@
+            <div class="card-footer text-center">
+                <a class="font-weight-bold" data-toggle="collapse" href="#collapseToDoList" role="button" aria-expanded="false" aria-controls="collapseToDoList">
+                    Daha Fazla Göster
+                </a>
+            </div>
+        }
+    </div>
+</div>

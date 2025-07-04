@@ -2,12 +2,10 @@
 @model List<UserMessage>
 
 <div class="card">
-    <div class="card-header d-flex justify-content-between align-items-center">
+    <div class="card-header d-flex justify-content-between align-items-center border-0">
         <h5 class="h3 mb-0">Gelen Mesajlar</h5>
-
         @{
-            // Okunmamış mesaj sayısını hesapla
-            var unreadCount = Model.Count(x => x.Status);
+            var unreadCount = Model.Count(x => !x.Status); // Status false ise okunmamış varsayıyoruz.
             if (unreadCount > 0)
             {
                 <span class="badge badge-pill badge-danger">@unreadCount Yeni</span>
@@ -15,48 +13,69 @@
         }
     </div>
     <div class="card-body p-0">
-        <div class="list-group list-group-flush">
-
-            @if (Model.Count == 0)
-            {
-                <div class="list-group-item">
-                    <p class="text-muted text-center mb-0">Gösterilecek mesaj bulunmuyor.</p>
-                </div>
-            }
-            else
-            {
-                @foreach (var item in Model)
+        @if (Model.Count == 0)
+        {
+            <div class="list-group-item">
+                <p class="text-muted text-center mb-0 py-3">Gösterilecek mesaj bulunmuyor.</p>
+            </div>
+        }
+        else
+        {
+            <div class="list-group list-group-flush">
+                @* --- 1. Adım: Sadece ilk 3 mesajı göster --- *@
+                @foreach (var item in Model.Take(2))
                 {
-                    // Status==false (okunmadı) ise class'ı dinamik olarak ayarla.
                     var itemClass = !item.Status ? "list-group-item-light font-weight-bold" : "";
-
-                    // Varsayılan profil fotoğrafı yolu. Bu yolu kendi projenize göre güncelleyin.
-                    var profileImageUrl = !string.IsNullOrEmpty(item.User.ImageUrl) ? item.User.ImageUrl : "/images/default-avatar.png";
+                    var profileImageUrl = !string.IsNullOrEmpty(item.User.ImageUrl) ? item.User.ImageUrl : "/img/theme/team-4.jpg"; // Varsayılan yolu güncelleyin
 
                     <a href="javascript:void(0);" class="list-group-item list-group-item-action @itemClass">
-                        @* --- YENİ: Ana taşıyıcı olarak d-flex kullanıyoruz --- *@
                         <div class="d-flex align-items-start w-100">
-
-                            @* --- YENİ: Kullanıcı Profil Fotoğrafı --- *@
-                            <img src="@item.User.ImageUrl" class="rounded-circle me-3" alt=@item.User.Name profil fotoğrafı" style="width: 30px; height: 30px; object-fit: cover;">
-
-                            @* Metin içeriğini taşıyan ve kalan tüm alanı kaplayan div *@
+                            <img src="@profileImageUrl" class="rounded-circle mr-3" alt="@item.User.Name profil fotoğrafı" style="width: 40px; height: 40px; object-fit: cover;">
                             <div class="flex-grow-1" style="min-width: 0;">
                                 <div class="d-flex w-100 justify-content-between">
                                     <h5 class="mb-1">@item.User.Name</h5>
-                                    <small class="text-muted">@item.Date.ToString("dd MMM yy")</small>
+                                    <small class="text-muted">@item.Date.ToString("dd MMM")</small>
                                 </div>
-
-                                <p class="mb-1"><strong>@item.Title</strong></p>
-
-                                <p class="mb-1 text-muted small text-truncate">
-                                    @item.Content
-                                </p>
+                                <p class="mb-1 text-muted small text-truncate">@item.Content</p>
                             </div>
                         </div>
                     </a>
                 }
+            </div>
+
+            @* --- 2. Adım: Eğer 3'ten fazla mesaj varsa, kalanını gizli alana ve butonu ekle --- *@
+            @if (Model.Count > 2)
+            {
+                <div class="collapse" id="collapseMessages">
+                    <div class="list-group list-group-flush">
+                        @foreach (var item in Model.Skip(2))
+                        {
+                            var itemClass = !item.Status ? "list-group-item-light font-weight-bold" : "";
+                            var profileImageUrl = !string.IsNullOrEmpty(item.User.ImageUrl) ? item.User.ImageUrl : "/img/theme/team-4.jpg";
+
+                            <a href="javascript:void(0);" class="list-group-item list-group-item-action @itemClass">
+                                <div class="d-flex align-items-start w-100">
+                                    <img src="@profileImageUrl" class="rounded-circle mr-3" alt="@item.User.Name profil fotoğrafı" style="width: 40px; height: 40px; object-fit: cover;">
+                                    <div class="flex-grow-1" style="min-width: 0;">
+                                        <div class="d-flex w-100 justify-content-between">
+                                            <h5 class="mb-1">@item.User.Name</h5>
+                                            <small class="text-muted">@item.Date.ToString("dd MMM")</small>
+                                        </div>
+                                        <p class="mb-1 text-muted small text-truncate">@item.Content</p>
+                                    </div>
+                                </div>
+                            </a>
+                        }
+                    </div>
+                </div>
+
+                @* --- 3. Adım: Genişletme/Daraltma butonu --- *@
+                <div class="card-footer text-center py-2">
+                    <a class="font-weight-bold small text-primary" data-toggle="collapse" href="#collapseMessages" role="button" aria-expanded="false" aria-controls="collapseMessages">
+                        Daha Fazla Göster
+                    </a>
+                </div>
             }
-        </div>
+        }
     </div>
 </div>
