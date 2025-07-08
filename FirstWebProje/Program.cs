@@ -1,11 +1,17 @@
 using BusinessLayer.ValidationRules;
+using DataAccessLayer.Concrete;
+using EntityLayer.Concrete;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddDbContext<Context>();
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
+builder.Services.AddIdentity<WriterUser, WriterRole>().AddEntityFrameworkStores<Context>();
+
 
 var app = builder.Build();
 
@@ -25,10 +31,7 @@ app.UseAuthorization();
 
 app.MapStaticAssets(); // Bu metodun ne yaptýðýný biliyorsanýz burada kalabilir.
 
-// --- DOÐRU YAPI BURASI ---
-// UseEndpoints bloðu olmadan, rotalarý doðrudan app üzerine ekleyin.
 
-// 1. Önce daha spesifik olan Area rotasý
 app.MapControllerRoute(
     name: "areas",
     pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}");
