@@ -6,6 +6,8 @@
     <title>Argon Dashboard - Free Dashboard for Bootstrap 4</title>
     <!-- Favicon -->
     <link rel="icon" href="~/argon-dashboard-master/assets/img/brand/favicon.png" type="image/png">
+   
+
     <!-- Fonts -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
     <!-- Icons -->
@@ -14,4 +16,45 @@
     <!-- Page plugins -->
     <!-- Argon CSS -->
     <link rel="stylesheet" href="~/argon-dashboard-master/assets/css/argon.css?v=1.2.0" type="text/css">
+
+    <style>
+        .services-container {
+            overflow-x: auto;
+            padding-bottom: 15px;
+        }
+
+        .services-wrapper {
+            display: flex;
+            flex-wrap: nowrap;
+            width: max-content;
+        }
+
+        .service-item {
+            flex: 0 0 320px;
+            margin-right: 1.5rem;
+        }
+
+        /* GÜNCELLENEN KISIM: Resim alanı için */
+        .service-image {
+            width: 100px; /* İkon alanı için genişlik (istediğiniz gibi ayarlayın) */
+            height: 100px; /* İkon alanı için yükseklik (istediğiniz gibi ayarlayın) */
+            margin: 0 auto 1.5rem auto; /* Üst:0, Sağ-Sol:otomatik (ortalar), Alt:boşluk */
+        }
+
+            /* YENİ EKLENEN KISIM: SVG'nin kendisi için */
+            .service-image svg {
+                width: 100%; /* Kendisini çevreleyen .service-image div'ini doldurur */
+                height: 100%;
+            }
+
+                /* İsteğe Bağlı: SVG'nin rengini değiştirmek isterseniz */
+                .service-image svg path {
+                    fill: #5e72e4; /* Argon temasının ana rengi (primary) */
+                }
+
+        .service-item h6 {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+    </style>
 </head>

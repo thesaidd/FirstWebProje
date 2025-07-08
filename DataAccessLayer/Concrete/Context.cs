@@ -15,7 +15,7 @@ namespace DataAccessLayer.Concrete
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("server=(localdb)\\MSSQLLocalDB ;database=CoreProjeDB;integrated security=true; TrustServerCertificate=True;");
+            optionsBuilder.UseSqlServer("server=Localhost ;database=CoreProjeDB;integrated security=true; TrustServerCertificate=True;");
         }
         public DbSet<About> Abouts { get; set; }
         public DbSet<Contact> Contacts { get; set; }

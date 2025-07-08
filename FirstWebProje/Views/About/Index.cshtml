@@ -7,31 +7,50 @@
 <div class="card-header border-0">
     <h3 class="mb-0">Hakkımda Düzenleme Sayfası</h3>
 </div>
+
 @using (Html.BeginForm("Index", "About", FormMethod.Post))
 {
-    @Html.HiddenFor(x => x.AboutID)
-    <br />
-    <label>Başlık</label>
-    @Html.TextBoxFor(x => x.Title, new { @class = "from-control" })
-    <br />
-    <label>Açıklama</label>
-    @Html.TextBoxFor(x => x.Description, new { @class = "from-control" })
-    <br />
-    <label>Yaş</label>
-    @Html.TextBoxFor(x => x.Age, new { @class = "from-control" })
-    <br />
-    <label>Mail</label>
-    @Html.TextBoxFor(x => x.Mail, new { @class = "from-control" })
-    <br />
-    <label>Adres</label>
-    @Html.TextBoxFor(x => x.Address, new { @class = "from-control" })
-    <br />
-    <label>Telefon</label>
-    @Html.TextBoxFor(x => x.Phone, new { @class = "from-control" })
-    <br />
-    <label>fotoğraf</label>
-    @Html.TextBoxFor(x => x.ImagwUrl, new { @class = "from-control" })
-    <br />
-    <button type="submit" class="btn btn-success">Güncelle</button>
-    
+    <div class="p-4">
+        @* ID'yi gizli olarak forma ekliyoruz *@
+        @Html.HiddenFor(x => x.AboutID)
+
+        <div class="form-group">
+            <label>Başlık</label>
+            @Html.TextBoxFor(x => x.Title, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            <label>Açıklama</label>
+            @* Açıklama için TextAreaFor kullandık ve 5 satır yükseklik verdik *@
+            @Html.TextAreaFor(x => x.Description, 5, 0, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            <label>Yaş</label>
+            @Html.TextBoxFor(x => x.Age, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            <label>Mail Adresi</label>
+            @Html.TextBoxFor(x => x.Mail, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            <label>Adres</label>
+            @* Adres için de TextAreaFor kullandık *@
+            @Html.TextAreaFor(x => x.Address, 5, 0, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            <label>Telefon</label>
+            @Html.TextBoxFor(x => x.Phone, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label>Fotoğraf URL</label>
+            @Html.TextBoxFor(x => x.ImagwUrl, new { @class = "form-control" })
+        </div>
+
+        <button type="submit" class="btn btn-success">Güncelle</button>
+        <a href="/Dashboard/Index/" class="btn btn-secondary">İptal</a>
+    </div>
 }

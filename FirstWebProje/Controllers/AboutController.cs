@@ -15,14 +15,21 @@ namespace FirstWebProje.Controllers
             ViewBag.v1 = "Hakkımda Listesi";
             ViewBag.v2 = "Hakkımda";
             ViewBag.v3 = "Hakkımda Listesi";
-            var values = aboutManager.TGetByID(2);
+            var values = aboutManager.TGetByID(4);
             return View(values);
         }
         [HttpPost]
         public IActionResult Index(About about)
         {
-            aboutManager.TUpdate(about);
-            return RedirectToAction("Index", "Default");
+
+            if (ModelState.IsValid)
+            {
+                aboutManager.TUpdate(about);
+                return RedirectToAction("Index", "Default");
+            }
+
+            // Eğer model geçerli değilse, formu hatalarla birlikte geri göster.
+            return View(about);
         }
     }
 }

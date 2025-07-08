@@ -13,15 +13,42 @@
                     <th scope="col">Link</th>
                 </tr>
             </thead>
+
+            @* 1. TBODY: Her zaman görünecek olan ilk 4 proje *@
             <tbody>
-                @foreach (dynamic item in Model)
+                @foreach (var item in Model.Take(4))
                 {
                     <tr>
                         <td>@item.Name</td>
-                        <td><a href="@item.ProjectUrl" class="btn btn-sm btn-primary">incele</a></td>
+                        <td><a href="@item.ProjectUrl" target="_blank" class="btn btn-sm btn-primary">İncele</a></td>
                     </tr>
                 }
             </tbody>
+
+            @* Eğer 4'ten fazla proje varsa, gizli tbody ve butonu oluştur *@
+            @if (Model.Count > 4)
+            {
+                @* 2. TBODY: Tıklandığında açılacak olan gizli projeler *@
+                <tbody class="collapse" id="collapseProjects">
+                    @foreach (var item in Model.Skip(4))
+                    {
+                        <tr>
+                            <td>@item.Name</td>
+                            <td><a href="@item.ProjectUrl" target="_blank" class="btn btn-sm btn-primary">İncele</a></td>
+                        </tr>
+                    }
+                </tbody>
+            }
         </table>
     </div>
+
+    @* Genişletme/Daraltma butonu tablo dışına, kartın altına (card-footer) eklenir *@
+    @if (Model.Count > 4)
+    {
+        <div class="card-footer text-center py-2">
+            <a class="font-weight-bold small" data-toggle="collapse" href="#collapseProjects" role="button" aria-expanded="false" aria-controls="collapseProjects">
+                Daha Fazla Göster
+            </a>
+        </div>
+    }
 </div>
