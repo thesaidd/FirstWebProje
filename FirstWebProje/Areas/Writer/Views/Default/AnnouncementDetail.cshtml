@@ -1,0 +1,22 @@
+﻿@model EntityLayer.Concrete.Announcement
+@{
+    ViewData["Title"] = "AnnouncementDetail";
+    Layout = "~/Views/Shared/_WriterLayout.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            @* Modelden gelen Id'yi başlıkta gösteriyoruz *@
+            <h4>Duyuru No: @Model.Id</h4>
+        </div>
+        <div class="card-body">
+            <div class="announcement-content">
+                @Html.Raw(Model.Content)
+            </div>
+        </div>
+        <div class="card-footer text-muted">
+            <a href="/Writer/Default/index/" class="btn btn-primary">Tüm Duyurulara Dön</a>
+        </div>
+    </div>
+</div>
