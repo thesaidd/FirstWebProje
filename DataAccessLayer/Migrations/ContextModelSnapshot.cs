@@ -473,6 +473,46 @@ namespace DataAccessLayer.Migrations
                     b.ToTable("UserMessages");
                 });
 
+            modelBuilder.Entity("EntityLayer.Concrete.WriterMessage", b =>
+                {
+                    b.Property<int>("WriterMessageID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("WriterMessageID"));
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("MessageContent")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Reciver")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ReciverName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Sender")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("SenderName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Subject")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("WriterMessageID");
+
+                    b.ToTable("WriterMessage");
+                });
+
             modelBuilder.Entity("EntityLayer.Concrete.WriterRole", b =>
                 {
                     b.Property<int>("Id")

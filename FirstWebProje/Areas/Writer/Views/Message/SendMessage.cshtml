@@ -1,0 +1,56 @@
+﻿@model EntityLayer.Concrete.WriterMessage
+
+@{
+    ViewData["Title"] = "SendMessage";
+    Layout = "~/Views/Shared/_WriterLayout.cshtml"; // Yazar paneli layout'unuzu kullanın
+}
+
+<h1>Yeni mesaj gönderme sayfası</h1>
+<br />
+<form class="form-group" method="post">
+    @Html.Label("alıcı mail")
+    @Html.TextBoxFor(x => x.Reciver, new { @class = "form-control"})
+    <br />
+    @Html.Label("konu")
+    @Html.TextBoxFor(x => x.Subject, new { @class = "form-control" })
+    <br />
+    @Html.Label("mesaj")
+    @Html.TextAreaFor(x => x.MessageContent, 10, 3, new { @class = "form-control" })
+    <button class="btn btn-outline-primary">gönder</button>
+</form>
+@* <div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="mb-0">Yeni Mesaj Oluştur</h4>
+        </div>
+        <div class="card-body">
+            <form asp-action="SendMessage" asp-controller="Message" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="form-group mb-3">
+                    <label for="Reciver">Alıcı (E-posta Adresi veya Kullanıcı Adı)</label>
+                    <input type="text" id="Reciver" name="Reciver" class="form-control" required placeholder="Alıcının e-posta adresi veya kullanıcı adı" />
+                    <span asp-validation-for="Reciver" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-3">
+                    <label for="Subject">Konu</label>
+                    <input type="text" id="Subject" name="Subject" class="form-control" required placeholder="Mesajınızın konusu" />
+                    <span asp-validation-for="Subject" class="text-danger"></span>
+                </div>
+
+                <div class="form-group mb-4">
+                    <label for="MessageContent">Mesajınız</label>
+                    <textarea id="MessageContent" name="MessageContent" class="form-control" rows="8" required placeholder="Mesaj içeriğini buraya yazın"></textarea>
+                    <span asp-validation-for="MessageContent" class="text-danger"></span>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-success btn-lg">Mesajı Gönder</button>
+                    <a href="/Writer/Default/index/" class="btn btn-secondary btn-lg">İptal / Geri Dön</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+ *@

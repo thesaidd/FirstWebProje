@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace FirstWebProje.Areas.Writer.Controllers
 {
     [Area("Writer")]
+    [Route("Writer/[Controller]/[action]")]
     public class ProfileController : Controller
     {
         private readonly UserManager<WriterUser> _userManager;

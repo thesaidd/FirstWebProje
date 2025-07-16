@@ -1,0 +1,56 @@
+﻿@model EntityLayer.Concrete.WriterMessage
+
+@{
+    ViewData["Title"] = "Mesaj Detayı";
+    Layout = "~/Views/Shared/_WriterLayout.cshtml";
+}
+
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-header">
+            @* Modelin null olup olmadığını kontrol edin (asıl kontrol Controller'da olmalıdır) *@
+            @if (Model != null)
+            {
+                <h4 class="mb-0">Mesaj Detayı - Konu: @Model.Subject</h4>
+            }
+            else
+            {
+                <h4 class="text-danger">Mesaj bulunamadı.</h4>
+            }
+        </div>
+        <div class="card-body">
+            @if (Model != null)
+            {
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <strong>Gönderen:</strong> @Model.SenderName
+                    </div>
+                    <div class="col-md-6 text-md-right">
+                        <strong>Tarih:</strong> @Model.Date.ToShortDateString() @Model.Date.ToShortTimeString()
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <strong>Alıcı:</strong> @Model.ReciverName
+                    </div>
+                    <div class="col-md-6">
+                        <strong>Mesaj No:</strong> @Model.WriterMessageID
+                    </div>
+                </div>
+                <hr />
+                <div class="announcement-content">
+                    <h5>Mesaj İçeriği:</h5>
+                    <p>@Html.Raw(Model.MessageContent)</p>
+                </div>
+            }
+            else
+            {
+                <p>Mesaj detayları yüklenemedi. Lütfen daha sonra tekrar deneyin veya farklı bir mesaj seçin.</p>
+            }
+        </div>
+        <div class="card-footer text-muted d-flex justify-content-end">
+            <a href="/Writer/Message/ReciverMessage/" class="btn btn-primary">gelen mesajlara Dön</a>
+            <a href="/Writer/Message/SenderMessage/" class="btn btn-primary">giden mesajlara Dön</a>
+        </div>
+    </div>
+</div>

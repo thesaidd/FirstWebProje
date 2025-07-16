@@ -26,6 +26,11 @@ namespace BusinessLayer.Concrete
             _featureDal.Delete(t);
         }
 
+        public List<Feature> TGetbyFilter()
+        {
+            throw new NotImplementedException();
+        }
+
         public Feature TGetByID(int id)
         {
             return _featureDal.GetById(id);

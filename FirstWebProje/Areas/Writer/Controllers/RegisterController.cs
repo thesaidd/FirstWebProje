@@ -7,6 +7,7 @@ using System.Reflection.Metadata.Ecma335;
 namespace FirstWebProje.Areas.Writer.Controllers
 {
     [Area("Writer")]
+    [Route("Writer/[Controller]/[action]")]
     public class RegisterController : Controller
     {
 

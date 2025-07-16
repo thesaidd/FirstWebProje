@@ -15,7 +15,7 @@ namespace DataAccessLayer.Concrete
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("server=(localdb)\\MSSQLLocalDB ;database=CoreProjeDB;integrated security=true; TrustServerCertificate=True;");
+            optionsBuilder.UseSqlServer("server=Localhost ;database=CoreProjeDB;integrated security=true; TrustServerCertificate=True;");
         }
         public DbSet<About> Abouts { get; set; }
         public DbSet<Contact> Contacts { get; set; }
@@ -27,10 +27,13 @@ namespace DataAccessLayer.Concrete
         public DbSet<Skill> Skills { get; set; }
         public DbSet<SocialMedia> SocialMedias { get; set; }
         public DbSet<Testimonial> Testimonials { get; set; }
-        public DbSet<User> Users { get; set; }
-        public DbSet<UserMessage> UserMessages { get; set; }
         public DbSet<ToDoList> ToDoLists { get; set; }
         public DbSet<Test> Tests { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<UserMessage> UserMessages { get; set; }
         public DbSet<Announcement> Announcements { get; set; }
+        public DbSet<WriterMessage> WriterMessage { get; set; }
+
+
     }
 }

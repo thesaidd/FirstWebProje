@@ -8,6 +8,7 @@ namespace FirstWebProje.Areas.Writer.Controllers
 {
     [Area("Writer")]
     [Authorize]
+    [Route("Writer/[Controller]/[action]")]
     public class DefaultController : Controller
     {
         AnnouncementManager announcementManager = new AnnouncementManager(new EFAnnouncementDal());
@@ -16,6 +17,7 @@ namespace FirstWebProje.Areas.Writer.Controllers
             var values = announcementManager.TGetList();
             return View(values);
         }
+        [HttpGet]
         public IActionResult AnnouncementDetail(int id)
         {
             var announcement = announcementManager.TGetByID(id);

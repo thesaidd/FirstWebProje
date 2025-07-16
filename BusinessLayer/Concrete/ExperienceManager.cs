@@ -58,5 +58,10 @@ namespace BusinessLayer.Concrete
             // Controller'dan gelen id'yi direkt DAL'daki PermanentDelete metoduna paslar.
             _experienceDal.PermanentDelete(id);
         }
+
+        public List<Experience> TGetbyFilter()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

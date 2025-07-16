@@ -1,4 +1,7 @@
-﻿using EntityLayer.Concrete;
+﻿using BusinessLayer.Concrete;
+using DataAccessLayer.Concrete;
+using DataAccessLayer.EntityFramework;
+using EntityLayer.Concrete;
 using Microsoft.AspNetCore.Components.Routing;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -7,6 +10,7 @@ using System.Xml.Linq;
 namespace FirstWebProje.Areas.Writer.Controllers
 {
     [Area("Writer")]
+    [Route("Writer/[Controller]/[action]")]
     public class DashboardController : Controller
     {
         private readonly UserManager<WriterUser> _userManager;
@@ -27,8 +31,17 @@ namespace FirstWebProje.Areas.Writer.Controllers
 
             var values = await _userManager.FindByNameAsync(User.Identity.Name);
             ViewBag.v = values.Name + " " + values.Surname;
+
+
+            WriterMessageManager A = new WriterMessageManager(new EFWriterMessageDal());
+            Context c = new Context();
+
+            string b = values.Email;
+            ViewBag.v1 = A.TGetListReciverMessage(b).Count;
+            ViewBag.v2 = A.TGetListSenderMessage(b).Count;
             return View();
         }
+        
     }
 }
 

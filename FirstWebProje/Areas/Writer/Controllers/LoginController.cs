@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace FirstWebProje.Areas.Writer.Controllers
 {
     [Area("Writer")]
+    [Route("Writer/[Controller]/[action]")]
     public class LoginController : Controller
     {
         private readonly SignInManager<WriterUser> _signInManager;
@@ -37,6 +38,11 @@ namespace FirstWebProje.Areas.Writer.Controllers
                 }
             }
             return View(p);
+        }
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Login");
         }
 
     }
