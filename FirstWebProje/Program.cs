@@ -3,6 +3,9 @@ using DataAccessLayer.Concrete;
 using EntityLayer.Concrete;
 using FluentValidation;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +14,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<Context>();
 builder.Services.AddControllersWithViews().AddRazorRuntimeCompilation();
 builder.Services.AddIdentity<WriterUser, WriterRole>().AddEntityFrameworkStores<Context>();
+builder.Services.AddMvc(Config => { var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+    Config.Filters.Add(new AuthorizeFilter(policy)); });
+builder.Services.AddMvc();
+//builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(x => { x.LoginPath = "/AdminLogin/Index/"; });
+builder.Services.ConfigureApplicationCookie(options => { options.Cookie.HttpOnly = true; options.ExpireTimeSpan = TimeSpan.FromMinutes(100);   options.AccessDeniedPath = "/ErroPage/Index/";    options.LoginPath="/Writer/Login/Index/"; });
 
 
 var app = builder.Build();
